@@ -1,0 +1,45 @@
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& nums) {
+        int n=nums.size();
+        int st=0,end=n-1;
+        if(n==1){
+            return nums[0];//edge case if only one elemnt is present
+        }
+        while(st<=end){
+            int mid=st+(end-st)/2;
+            if(mid==0){
+                if(nums[0]!=nums[1]){
+                    return nums[0];
+                }
+            }
+            if(mid==(n-1)){
+                if(nums[n-1]!=nums[n-2]){
+                    return nums[n-1];
+                }
+            }
+            if(nums[mid-1]!=nums[mid]&&nums[mid]!=nums[mid+1]){
+                return nums[mid];
+            }
+            if(mid%2==0){
+                if(nums[mid-1]==nums[mid]){
+                    end=mid-1;//single is found in left
+                }
+                else{
+                    st=mid+1;//single is found in right;
+                }
+            }
+            else{//mid is odd
+              if(nums[mid-1]==nums[mid]){
+                st=mid+1;//single element found in right
+              }
+              else{
+                end=mid-1;//single is found in left
+              }
+              
+
+            }
+        }
+        return -1;
+    }
+};
